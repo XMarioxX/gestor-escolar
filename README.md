@@ -1,1 +1,3 @@
-# gestor-escolar
+Gestor Escolar
+
+Mario Eduardo Sánchez Mejía
