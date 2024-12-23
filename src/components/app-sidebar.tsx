@@ -13,6 +13,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { ModeToggle } from "./mode-toggle"
 
 const items = [
     {
@@ -33,12 +34,11 @@ export function AppSidebar() {
             <SidebarHeader />
 
             <SidebarMenu>
-                <SidebarMenuItem>
-                    <div className="flex flex-col gap-0.5 leading-none border border-black bg-blue-200 mx-10 justify-center items-center p-2 rounded-lg">
+                <SidebarMenuItem className=" flex flex-row justify-around items-center gap-2">
+                    <div className="flex flex-col gap-0.5 leading-none border border-black bg-blue-200 justify-center items-center p-2 rounded-lg">
                         <span className="font-semibold">Gestor Escolar</span>
                     </div>
-                    {/*Aqui ira el toogle para los temas */}
-
+                    <ModeToggle />
                 </SidebarMenuItem>
             </SidebarMenu>
 
