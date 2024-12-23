@@ -39,16 +39,23 @@ const data = {
 export function AppSidebar() {
     return (
         <Sidebar>
-            <SidebarHeader />
+            <SidebarHeader>
 
-            <SidebarMenu>
-                <SidebarMenuItem className=" flex flex-row justify-around items-center gap-2">
-                    <div className="flex flex-col gap-0.5 leading-none border border-black bg-blue-200 justify-center items-center p-2 rounded-lg">
-                        <span className="font-semibold">Gestor Escolar</span>
-                    </div>
-                    <ModeToggle />
-                </SidebarMenuItem>
-            </SidebarMenu>
+                <SidebarMenu>
+                    <SidebarMenuItem className=" flex flex-row justify-around items-center gap-2">
+                        <SidebarMenuButton asChild>
+                            <div className="flex flex-col gap-0.5 leading-none border border-black bg-primary text-secondary justify-center items-center p-2 rounded-lg">
+                                <Link href={"/"}>
+                                    <span className="font-semibold">Gestor Escolar</span>
+                                </Link>
+
+                            </div>
+                        </SidebarMenuButton>
+                        <ModeToggle />
+                    </SidebarMenuItem>
+                </SidebarMenu>
+
+            </SidebarHeader>
 
             <SidebarContent>
 
@@ -74,7 +81,7 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                            <NavUser user={data.user} />
+                <NavUser user={data.user} />
             </SidebarFooter>
         </Sidebar>
     )
