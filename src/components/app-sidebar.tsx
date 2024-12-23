@@ -14,19 +14,27 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
+import { NavUser } from "./nav-user"
 
-const items = [
-    {
-        title: "Inicio",
-        url: "/",
-        icon: Home,
-    },
-    {
-        title: "Materias",
-        url: "/Materias",
-        icon: LibraryBig,
+const data = {
+    items: [
+        {
+            title: "Inicio",
+            url: "/",
+            icon: Home,
+        },
+        {
+            title: "Materias",
+            url: "/Materias",
+            icon: LibraryBig,
+        }
+    ],
+    user: {
+        name: "shadcn",
+        email: "m@example.com",
+        avatar: "/avatars/shadcn.jpg",
     }
-]
+}
 
 export function AppSidebar() {
     return (
@@ -48,7 +56,7 @@ export function AppSidebar() {
                     {/* <SidebarGroupLabel>General</SidebarGroupLabel> */}
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {data.items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <Link href={item.url}>
@@ -65,7 +73,9 @@ export function AppSidebar() {
 
             </SidebarContent>
 
-            <SidebarFooter />
+            <SidebarFooter>
+                            <NavUser user={data.user} />
+            </SidebarFooter>
         </Sidebar>
     )
 }
