@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 import {
   ColumnDef,
@@ -20,9 +21,19 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+interface ApiData<TData> {
+  data: TData[]
+  pagination?: {
+    currentPage: number
+    totalPages: number
+    hasNextPage: boolean
+    hasPrevPage: boolean
+  }
+}
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: ApiData<TData>
 }
 
 export function DataTable<TData, TValue>({
@@ -35,10 +46,15 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data: tableData,
     columns,
-    getCoreRowModel: getCoreRowModel(),
+    pageCount: data.pagination?.totalPages,
+    state: {
+      pagination: {
+          pageIndex: (data.pagination?.currentPage || 1) - 1,
+          pageSize: 0
+      },
+    },
     manualPagination: true,
-    rowCount: data?.pagination?.totalPages,
-    
+    getCoreRowModel: getCoreRowModel(),
   })
 
   return (
@@ -89,23 +105,25 @@ export function DataTable<TData, TValue>({
     </div>
     
     <div className="flex items-center justify-end space-x-2 py-4">
+      <Link href={`/Alumnos?page=${(data.pagination?.currentPage || 1) - 1}`}>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          disabled={!data.pagination?.hasPrevPage}
         >
           Anterior
         </Button>
+      </Link>
+      <Link href={`/Alumnos?page=${(data.pagination?.currentPage || 1) + 1}`}>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
+          disabled={!data.pagination?.hasNextPage}
         >
           Siguiente
         </Button>
-      </div>
+      </Link>
+    </div>
 
     </div>
 
