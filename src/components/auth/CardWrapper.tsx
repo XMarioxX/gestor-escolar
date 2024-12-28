@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card"
 
 import BackButton from "./BackButton"
+import Link from "next/link"
 
 
 interface CardWrapperProps {
@@ -22,7 +23,7 @@ interface CardWrapperProps {
 
 const CardWrapper = ({ label, title, backButtonHref, backButtonLabel, children }: CardWrapperProps) => {
     return (
-        <Card className="w-full max-w-md shadow-md">
+        <Card className="w-full max-w-2xl shadow-md">
             <CardHeader>
                 <div className="w-full flex flex-col gap-y-4 items-center justify-center">
                     <CardTitle className="text-3xl font-semibold" > {title}</CardTitle>
@@ -35,7 +36,13 @@ const CardWrapper = ({ label, title, backButtonHref, backButtonLabel, children }
             </CardContent>
 
             <CardFooter>
-                <BackButton label={backButtonLabel} href={backButtonHref} />
+                <div className="w-full flex flex-col gap-y-4 items-center justify-center">
+                    <CardDescription className="text-muted-foreground text-sm" >
+                        <Link href={backButtonHref}>
+                            {backButtonLabel}
+                        </Link>
+                    </CardDescription>
+                </div>
             </CardFooter>
 
         </Card>
