@@ -1,10 +1,9 @@
-import RegisterForm from '@/components/auth/RegisterForm'
 
 
 const RegisterPage = () => {
   return (
     <div>
-        <RegisterForm />
+        Register Page
     </div>
   )
 }

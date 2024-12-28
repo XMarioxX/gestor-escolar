@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form"
 
 import CardWrapper from "./CardWrapper"
-import { RegisterSchema } from "@/schema"
+import { LoginSchema } from "@/schema"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -20,19 +20,17 @@ import { Button } from "../ui/button"
 import { z } from 'zod'
 
 
-const RegisterForm = () => {
+const LoginForm = () => {
 
   const form = useForm({
-    resolver: zodResolver(RegisterSchema),
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
     }
   })
 
-  const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = (data: z.infer<typeof LoginSchema>) => {
     //Logic to send fata to the backend
     //Here data is already validated
     console.log(data)
@@ -40,28 +38,15 @@ const RegisterForm = () => {
 
   return (
     <CardWrapper
-      label="Crea tu cuenta"
-      title="Registro"
-      backButtonHref="/auth/login"
-      backButtonLabel="¿Ya tienes una cuenta? Inicia sesión"
+      label="Inicio de sesión"
+      title="Bienvenido a Gestor Escolar"
+      backButtonHref="/auth/register"
+      backButtonLabel="¿Eres nuevo?, Regístrate aquí"
     >
 
       <Form {...form} >
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 " >
-          {/* Name Field */}
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nombre</FormLabel>
-                <FormControl>
-                  <input {...field} type="text" placeholder="Alumno" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           {/* Email Field */}
           <FormField
             control={form.control}
@@ -90,22 +75,9 @@ const RegisterForm = () => {
               </FormItem>
             )}
           />
-          {/* Confirm Password Field */}
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirmar Contraseña</FormLabel>
-                <FormControl>
-                  <input {...field} type="password" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           <Button type="submit" className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark">
-            Registrarse
+            Inicia Sesion
           </Button>
         </form>
       </Form>
@@ -114,4 +86,4 @@ const RegisterForm = () => {
   )
 }
 
-export default RegisterForm
+export default LoginForm
